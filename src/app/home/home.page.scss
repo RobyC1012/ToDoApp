@@ -1,4 +1,4 @@
-#container {
+/*#container {
   text-align: center;
 
   position: absolute;
@@ -16,12 +16,69 @@
 #container p {
   font-size: 16px;
   line-height: 22px;
-
   color: #8c8c8c;
-
   margin: 0;
 }
 
 #container a {
   text-decoration: none;
+}*/
+ion-button{
+  color:#ffffff;
 }
+
+ion-content{
+  //--background: var(--ion-color-primary);
+  --background: #32aaff;
+  P{
+      font-size: 14px;
+      font-weight: 400; 
+  }
+  
+  ion-icon{
+    font-size: 20px;
+    padding-right: 3px;
+  }
+
+  ion-row{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    background: #1c1c1d;
+    ion-item{
+      --background: #1c1c1d;
+      border-radius: 10px;
+      ion-label{
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+  
+  ion-card-title{
+    display: flex;
+    justify-content:space-between;
+  }
+  
+  
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: green;
+}
+

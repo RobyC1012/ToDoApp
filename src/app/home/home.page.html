@@ -11,14 +11,52 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-list>
-    <ion-item *ngFor="let task of tasks" (click)="openTask(task)">
-      <ion-label>
-        {{ task.title }}
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-header>
+  <ion-toolbar (click)="applyFilter()">
+    <ion-segment [(ngModel)]="selectedFilter">
+      <ion-segment-button value="open">
+        Open Tasks
+      </ion-segment-button>
+      <ion-segment-button value="due">
+        Tasks Due in 5 days
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let task of filteredTasks">
+    <div *ngIf="profile.uid === task.owner">
+      <ion-card-header>
+        <ion-card-title>{{ task.title }}
+          <ion-card-subtitle>Status <span [ngClass]="getStatus(task)"></span></ion-card-subtitle>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <label>{{ task.description }}</label>
+      </ion-card-content>
+      <ion-card-content>
+        <labeL>Due {{ task.due_date | date:'EEEE, MMMM d, y, h:mm:ss a'}}</labeL>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-item (click)="changeStatus(task)">
+          <ion-icon name="disc"></ion-icon>
+          <p>Status</p>
+        </ion-item>
+        <ion-item (click)="markTask(task)">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          <p>Complete</p>
+        </ion-item>
+        <ion-item (click)="deleteTask(task)">
+          <ion-icon name="trash"></ion-icon>
+          <p>Delete</p>
+        </ion-item>
+      </ion-row>
+    </div>
+  </ion-card>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addTask()">
       <ion-icon name="add"></ion-icon>

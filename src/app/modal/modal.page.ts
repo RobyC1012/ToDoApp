@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { DataService, Task } from '../services/data.service';
+
 
 @Component({
   selector: 'app-modal',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal.page.scss'],
 })
 export class ModalPage implements OnInit {
+  @Input() id!: string;
+  task!: Task;
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.dataService.getTaskById(this.id).subscribe(res => {
+      this.task = res;
+      console.log("success");
+    });
+    console.log("passed");
   }
 
+  async dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
 }
