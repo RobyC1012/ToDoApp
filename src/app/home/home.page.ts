@@ -96,7 +96,29 @@ export class HomePage {
   }
 
   async deleteTask(task: Task) {
-    await this.dataService.deleteTask(task);
+    
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete this task?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Canceled');
+          }
+        }, {
+          text: 'Delete',
+          role: 'submit',
+          cssClass: 'secondary',
+          handler: async () => { 
+            await this.dataService.deleteTask(task);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async markTask(task: Task) {

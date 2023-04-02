@@ -29,7 +29,7 @@ ion-button{
 
 ion-content{
   //--background: var(--ion-color-primary);
-  --background: #32aaff;
+  //--background: #32aaff;
   P{
       font-size: 14px;
       font-weight: 400; 
@@ -44,9 +44,9 @@ ion-content{
     display: flex;
     align-items: center;
     justify-content:space-around;
-    background: #1c1c1d;
+    //background: #1c1c1d;
     ion-item{
-      --background: #1c1c1d;
+      //--background: #1c1c1d;
       border-radius: 10px;
       ion-label{
         padding: 0;
