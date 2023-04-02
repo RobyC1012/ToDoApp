@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Task, DataService } from '../services/data.service';
 import { DocumentData } from '@angular/fire/firestore';
 import { AlertController, ModalController } from '@ionic/angular';
-import { ModalPage } from '../modal/modal.page';
 
 @Component({
   selector: 'app-home',
@@ -40,9 +39,9 @@ export class HomePage {
 
   filterOpenTasks() {
     this.filteredTasks = this.tasks;
-    this.filteredTasks.sort((a, b) =>{
-      if(a.closed && !b.closed) return 1;
-      else if(!a.closed && b.closed) return -1;
+    this.filteredTasks.sort((a, b) => {
+      if (a.closed && !b.closed) return 1;
+      else if (!a.closed && b.closed) return -1;
       else return 0;
     })
   }
@@ -75,47 +74,37 @@ export class HomePage {
     const hour = String(today.getHours()).padStart(2, '0');
     const minute = String(today.getMinutes()).padStart(2, '0');
     const current_date = year + '-' + month + '-' + day + 'T' + hour + ':' + minute;
-    console.log(current_date);
     return current_date;
   }
 
-  getStatus(task: Task)
-  {
-    if( task.status === "open" )
+  getStatus(task: Task) {
+    if (task.status === "open")
       return "dot blue";
-    else if( task.status === "closed" )
+    else if (task.status === "closed")
       return "dot green";
-    else if( task.status === "working" )
+    else if (task.status === "working")
       return "dot orange";
     return "";
   }
 
-  changeStatus(task: Task){
-    if( task.status === "open" )
+  changeStatus(task: Task) {
+    if (task.status === "open")
       task.status = "working";
-    else if( task.status === "working" )
+    else if (task.status === "working")
       task.status = "open";
     this.dataService.updateTask(task);
-  }
-
-  async openTask(task: Task) {
-    const modal = await this.modalController.create({
-      component: ModalPage,
-      componentProps: { id: task.id }
-    });
-    return await modal.present();
   }
 
   async deleteTask(task: Task) {
     await this.dataService.deleteTask(task);
   }
 
-  async markTask(task: Task){
-    if( task.closed ){
+  async markTask(task: Task) {
+    if (task.closed) {
       task.status = "open";
       task.closed = false;
     }
-    else{
+    else {
       task.status = "closed";
       task.closed = true;
     }
@@ -123,59 +112,6 @@ export class HomePage {
   }
 
   async addTask() {
-    const alert = await this.alertController.create({
-      header: 'Add Task',
-      inputs: [
-        {
-          name: 'title',
-          type: 'text',
-          placeholder: 'Title'
-        },
-        {
-          name: 'description',
-          type: 'text',
-          placeholder: 'Description'
-        },
-        {
-          name: 'due_date',
-          type: 'datetime-local',
-          placeholder: 'Due Date',
-          min: this.getTodayDateTime()
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-
-          }
-        }, {
-          text: 'Ok',
-          handler: async (data) => {
-            const task: Task = {
-              title: data.title,
-              description: data.description,
-              owner: this.profile.uid,
-              created: new Date(),
-              due_date: data.due_date,
-              status: 'open',
-              closed: false
-            }
-            await this.dataService.addTask(task);
-          }
-        }
-      ]
-    });
-    await alert.present();
+    this.router.navigateByUrl("/addtodo", { replaceUrl: true });
   }
-
-
-
-
 }
-function moment(due_date: Date) {
-  throw new Error('Function not implemented.');
-}
-

@@ -26,8 +26,9 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'modal',
-    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
+    path: 'addtodo',
+    loadChildren: () => import('./addtodo/addtodo.module').then( m => m.AddtodoPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
 ];
 

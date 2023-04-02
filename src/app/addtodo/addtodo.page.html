@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Task</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" >
+    <ion-item>
+      <ion-label position="stacked">Title</ion-label>
+      <ion-input type="text" maxlength="30" name="title" ngModel></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea rows="4" (ionInput)="countChars($event)" maxlength="200" name="description" ngModel></ion-textarea>
+      <div class="ion-padding">{{ charCount }} / 200</div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Due Date</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" name="due_date" min="{{ getTodayDateTime() }}" ngModel></ion-datetime>
+    </ion-item>
+
+    <span>
+      <ion-button type="submit">
+        Add
+      </ion-button>
+    </span>
+  </form>
+</ion-content>

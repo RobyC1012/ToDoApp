@@ -29,7 +29,8 @@
     <div *ngIf="profile.uid === task.owner">
       <ion-card-header>
         <ion-card-title>{{ task.title }}
-          <ion-card-subtitle>Status <span [ngClass]="getStatus(task)"></span></ion-card-subtitle>
+          <ion-card-subtitle><span [ngClass]="getStatus(task)"></span> {{ task.status === "working" ? 'Working' :
+            (task.status === "open" ? 'Open' : 'Closed') }}</ion-card-subtitle>
         </ion-card-title>
       </ion-card-header>
 
