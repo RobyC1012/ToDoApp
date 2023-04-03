@@ -1,3 +1,14 @@
+ion-toolbar{
+    --background: #4c4ce7;
+    ion-title{
+        color:#FFFFFF;
+    }
+    ion-back-button{
+        color:#FFFFFF;
+    }
+}
+
+
 ion-content{
     
     form{
@@ -27,4 +38,5 @@ ion-content{
             }
         }
     }
+
 }

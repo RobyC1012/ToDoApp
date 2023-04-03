@@ -24,7 +24,18 @@
   text-decoration: none;
 }*/
 ion-button{
-  color: #000000;
+  color: #FFFFFF;
+}
+
+ion-toolbar{
+  --background: #4c4ce7;
+  ion-segment-button{
+    color: #FFFFFF;
+  }
+  color: #FFFFFF;
+  ion-title{
+    font-size: 20px;
+  }
 }
 
 ion-content{
